@@ -66,7 +66,7 @@ void InitTimer1(void) {
 //interuption timmer 1
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
     IFS0bits.T1IF = 0;
-    LED_BLANCHE_1 = !LED_BLANCHE_1;
+Z    LED_BLANCHE_1 = !LED_BLANCHE_1;
     PWMUpdateSpeed();
     ADC1StartConversionSequence();
 }

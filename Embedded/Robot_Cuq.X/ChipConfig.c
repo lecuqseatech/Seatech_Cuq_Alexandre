@@ -59,7 +59,7 @@
 
 void InitOscillator() {
 
-    //F_IN = 7.37 MHz    
+Z    //F_IN = 7.37 MHz    
     OSCTUNbits.TUN = 23; // Décalage de 0.375 % par unité -> Freq = 7.37*(1+TUN*0.0375))
     // 23 permet de passer à 8MHz
     //Configuration for 60MIPS (120MHz), en réalité 119.76 MHz cf. feuille calcul Matlab

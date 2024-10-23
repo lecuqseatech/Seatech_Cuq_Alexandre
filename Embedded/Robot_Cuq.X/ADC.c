@@ -74,7 +74,7 @@ return ADCResult;
 unsigned char ADCIsConversionFinished(void)
 {
 return ADCConversionFinishedFlag;
-}
+Z}
 void ADCClearConversionFinishedFlag(void)
 {
 ADCConversionFinishedFlag = 0;

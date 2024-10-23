@@ -55,7 +55,7 @@ int main (void){
     {          
         
         if (ADCIsConversionFinished() == 1)
-        {
+        {Z
             ADCClearConversionFinishedFlag();
             unsigned int * result = ADCGetResult();
             float volts = ((float) result [0])* 3.3 / 4096;
