@@ -54,7 +54,7 @@ void InitTimer1(void) {
     //01 = 1:8 prescale value
     //00 = 1:1 prescale value
     T1CONbits.TCS = 0; //clock source = internal clock
-    PR1 = 0x00bd;
+    PR1 = 30000;
 
     IFS0bits.T1IF = 0; // Clear Timer Interrupt Flag
     IEC0bits.T1IE = 1; // Enable Timer interrupt
