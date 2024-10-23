@@ -20,7 +20,7 @@ void InitPWM(void) {
     FCLCON2 = 0x0003; //ÈDsactive la gestion des faults
     /* Enable PWM Module */
     PTCONbits.PTEN = 1;
-    robotState.acceleration = 0.1;
+    robotState.acceleration = 0.6;
 }
 double talon = 50;
 
