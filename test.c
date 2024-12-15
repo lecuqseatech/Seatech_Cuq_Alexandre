@@ -88,32 +88,228 @@ void SetNextRobotStateInAutomaticMode() {
 
 
 void SetNextRobotStateInAutomaticMode() 
-    {
+{
     unsigned char positionObstacle = PAS_D_OBSTACLE;
-    //ou est l'obstacle
-    if (robotState.distanceTelemetreXtrmGauche < 15)
+
+    // Où est l'obstacle ?
+    if (robotState.distanceTelemetreXtrmGauche < 15) //10000
+    {
+        if (robotState.distanceTelemetreGauche < 20)  //01000
         {
-        if (robotState.distanceTelemetreGauche < 20)
+            if (robotState.distanceTelemetreCentre < 25) //00100
             {
-            if (robotState.distanceTelemtreCentre <25)
+                if (robotState.distanceTelemetreDroit < 20) //00010
                 {
-                if (robotState.distanceTelemetreDroit < 20)
+                    if (robotState.distanceTelemetreXtrmDroit < 15) //00001
                     {
-                    if (robotState.distanceTelemetreXtrmDroit < 15)
-                        {
                         positionObstacle = PAS_D_OBSTACLE;
-                        }
+                    } 
+                    else //distanceTelemetreXtrmDroit > 15
+                    {
+                        positionObstacle = OBSTACLE_A_XTRM_DROITE;
+                    }
+                } 
+                else //distanceTelemetreDroit > 20
+                {
+                    if (robotState.distanceTelemetreXtrmDroit < 15) 
+                    {
+                        positionObstacle = OBSTACLE_EN_FACE;
+                    } 
                     else 
-                        {
-                        positionObstacle = OBSTACLE_A_XTRM_DROITE
-                        }
+                    {
+                        positionObstacle = OBSTACLE_A_XTRM_DROITE;
+                    }
+                }
+            }
+            else //distanceTelemetreCentre > 25
+            {
+                if (robotState.distanceTelemetreDroit < 20) 
+                {
+                    if (robotState.distanceTelemetreXtrmDroit < 15) 
+                    {
+                        positionObstacle = DEVANT;
+                    } 
+                    else //distanceTelemetreXtrmDroit > 15
+                    {
+                        positionObstacle = OBSTACLE_A_DROITE;
+                    }
+                } 
+                else //distanceTelemetreDroit > 20
+                {
+                    if (robotState.distanceTelemetreXtrmDroit < 15) 
+                    {
+                        positionObstacle = OBSTACLE_A_DROITE;
+                    } 
+                    else 
+                    {
+                        positionObstacle = OBSTACLE_A_DROITE;
                     }
                 }
             }
         }
+        if (robotState.distanceTelemetreGauche > 20) 
+        {
+            if (robotState.distanceTelemetreCentre < 25) 
+            {
+                if (robotState.distanceTelemetreDroit < 20) 
+                {
+                    if (robotState.distanceTelemetreXtrmDroit < 15) 
+                    {
+                        positionObstacle = OBSTACLE_EN_FACE2;      
+                    } 
+                    else //distanceTelemetreXtrmDroit > 15
+                    {
+                        positionObstacle = OBSTACLE_EN_FACE;
+                    }
+                } 
+                else //distanceTelemetreDroit > 20
+                {
+                    if (robotState.distanceTelemetreXtrmDroit < 15) 
+                    {
+                        positionObstacle = DEVANT;
+                    } 
+                    else 
+                    {
+                        positionObstacle = OBSTACLE_EN_FACE;           
+                    }
+                }
+            }
+            else //distanceTelemetreCentre > 25
+            {
+                if (robotState.distanceTelemetreDroit < 20) 
+                {
+                    if (robotState.distanceTelemetreXtrmDroit < 15) 
+                    {
+                        positionObstacle = OBSTACLE_A_GAUCHE;                         
+                    } 
+                    else //distanceTelemetreXtrmDroit > 15
+                    {
+                        positionObstacle = OBSTACLE_EN_FACE;   
+                    }
+                } 
+                else //distanceTelemetreDroit > 20
+                {
+                    if (robotState.distanceTelemetreXtrmDroit < 15) 
+                    {
+                        positionObstacle = DEVANT;
+                    } 
+                    else 
+                    {
+                        positionObstacle = OBSTACLE_EN_FACE;
+                    }
+                }
+            }
+    }                                         
+if (robotState.distanceTelemetreXtrmGauche > 15) //10000
+    {
+        if (robotState.distanceTelemetreGauche < 20)  //01000
+        {
+            if (robotState.distanceTelemetreCentre < 25) //00100
+            {
+                if (robotState.distanceTelemetreDroit < 20) //00010
+                {
+                    if (robotState.distanceTelemetreXtrmDroit < 15) //00001
+                    {
+                        positionObstacle = OBSTACLE_A_XTRM_GAUCHE;
+                    } 
+                    else //distanceTelemetreXtrmDroit > 15
+                    {
+                        positionObstacle = PAS_D_OBSTACLE;
+                    }
+                } 
+                else //distanceTelemetreDroit > 20
+                {
+                    if (robotState.distanceTelemetreXtrmDroit < 15) 
+                    {
+                        positionObstacle = OBSTACLE_EN_FACE2; 
+                    } 
+                    else 
+                    {
+                        positionObstacle = OBSTACLE_EN_FACE; 
+                    }
+                }
+            }
+            else //distanceTelemetreCentre > 25
+            {
+                if (robotState.distanceTelemetreDroit < 20) 
+                {
+                    if (robotState.distanceTelemetreXtrmDroit < 15) 
+                    {
+                        positionObstacle = OBSTACLE_A_GAUCHE;  
+                    } 
+                    else //distanceTelemetreXtrmDroit > 15
+                    {
+                        positionObstacle = DEVANT;
+                    }
+                } 
+                else //distanceTelemetreDroit > 20
+                {
+                    if (robotState.distanceTelemetreXtrmDroit < 15) 
+                    {
+                        positionObstacle = OBSTACLE_EN_FACE2;  
+                    } 
+                    else 
+                    {
+                        positionObstacle = OBSTACLE_EN_FACE;       
+                    }
+                }
+            }
+        }
+        if (robotState.distanceTelemetreGauche > 20) 
+        {
+            if (robotState.distanceTelemetreCentre < 25) 
+            {
+                if (robotState.distanceTelemetreDroit < 20) 
+                {
+                    if (robotState.distanceTelemetreXtrmDroit < 15) 
+                    {
+                        positionObstacle = OBSTACLE_A_XTRM_GAUCHE;  
+                    } 
+                    else //distanceTelemetreXtrmDroit > 15
+                    {
+                        positionObstacle = OBSTACLE_EN_FACE;   
+                    }
+                } 
+                else //distanceTelemetreDroit > 20
+                {
+                    if (robotState.distanceTelemetreXtrmDroit < 15) 
+                    {
+                        positionObstacle = OBSTACLE_EN_FACE2;  
+                    } 
+                    else 
+                    {
+                        positionObstacle = DEVANT;       
+                    }
+                }
+            }
+            else //distanceTelemetreCentre > 25
+            {
+                if (robotState.distanceTelemetreDroit < 20) 
+                {
+                    if (robotState.distanceTelemetreXtrmDroit < 15) 
+                    {
+                        positionObstacle = OBSTACLE_EN_FACE2;                   
+                    } 
+                    else //distanceTelemetreXtrmDroit > 15
+                    {
+                        positionObstacle = OBSTACLE_EN_FACE2;      
+                    }
+                } 
+                else //distanceTelemetreDroit > 20
+                {
+                    if (robotState.distanceTelemetreXtrmDroit < 15) 
+                    {
+                        positionObstacle = OBSTACLE_EN_FACE2;
+                    } 
+                    else 
+                    {
+                        positionObstacle = DEVANT;
+                    }
+                }
+            }
     }
 
-
+}
 
 
 
