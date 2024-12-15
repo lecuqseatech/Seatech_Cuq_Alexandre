@@ -50,8 +50,8 @@ unsigned char DetermineObstaclePosition(unsigned char mask) {
         case 0b11010: return OBSTACLE_EN_FACE2;       
         case 0b11011: return DEVANT;        
         case 0b11100: return OBSTACLE_EN_FACE2;               
-        case 0b11101: return OBSTACLE_EN_FACE2;               te
-        case 0b11110: return OBSTACLE_EN_FACE2;               // Extrême gauche + gauche + devant-centre + droite
+        case 0b11101: return OBSTACLE_EN_FACE2;               
+        case 0b11110: return OBSTACLE_EN_FACE2;    
         case 0b11111: return DEVANT;            
         default: return PAS_D_OBSTACLE;                       
     }
