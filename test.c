@@ -90,6 +90,7 @@ void SetNextRobotStateInAutomaticMode() {
 void SetNextRobotStateInAutomaticMode() {
     unsigned char positionObstacle = PAS_D_OBSTACLE;
     //ou est l'obstacle
+        if robotState.distanceTelemetreXtrmGauche
 
 
 
