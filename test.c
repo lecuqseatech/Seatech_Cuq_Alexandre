@@ -87,10 +87,31 @@ void SetNextRobotStateInAutomaticMode() {
 
 
 
-void SetNextRobotStateInAutomaticMode() {
+void SetNextRobotStateInAutomaticMode() 
+    {
     unsigned char positionObstacle = PAS_D_OBSTACLE;
     //ou est l'obstacle
-        if robotState.distanceTelemetreXtrmGauche
+    if (robotState.distanceTelemetreXtrmGauche < 15)
+        {
+        if (robotState.distanceTelemetreGauche < 20)
+            {
+            if (robotState.distanceTelemtreCentre <25)
+                {
+                if (robotState.distanceTelemetreDroit < 20)
+                    {
+                    if (robotState.distanceTelemetreXtrmDroit < 15)
+                        {
+                        positionObstacle = PAS_D_OBSTACLE;
+                        }
+                    else 
+                        {
+                        positionObstacle = OBSTACLE_A_XTRM_DROITE
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 
 
