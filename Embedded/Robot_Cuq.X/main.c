@@ -141,7 +141,7 @@ unsigned char DetermineNextState(unsigned char positionObstacle) {
         case OBSTACLE_EN_FACE2: return STATE_TOURNE_SUR_PLACE_DROITE;
         case OBSTACLE_A_XTRM_DROITE: return STATE_TOURNE_MID_GAUCHE;
         case OBSTACLE_A_XTRM_GAUCHE: return STATE_TOURNE_MID_DROITE;
-        default: return STATE_STOP; // État par défaut si non défini
+        default: return STATE_ATTENTE; // État par défaut si non défini
     }
 }
 
