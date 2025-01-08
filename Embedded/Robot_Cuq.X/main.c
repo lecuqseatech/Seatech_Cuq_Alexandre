@@ -30,7 +30,7 @@ int main(void) {
     /**************************************************************************/
     //Initialisation timer
     /**************************************************************************/
-    InitTimer1();
+    //InitTimer1();
     //InitTimer23();
     InitTimer4();
 
@@ -66,6 +66,27 @@ int main(void) {
             robotState.distanceTelemetreDroit = 34 / volts - 5;
             volts = ((float) result [4])* 3.3 / 4096;
             robotState.distanceTelemetreXtrmDroit = 34 / volts - 5;
+            
+            if(robotState.distanceTelemetreXtrmGauche <15)
+                LED_BLANCHE_1 = 1;
+            else
+                LED_BLANCHE_1 = 0;
+            if(robotState.distanceTelemetreGauche <20)
+                LED_BLEUE_1 = 1;
+            else
+                LED_BLEUE_1 = 0;
+                        if(robotState.distanceTelemetreCentre <25)
+                LED_ORANGE_1 = 1;
+            else
+                LED_ORANGE_1 = 0;
+                        if(robotState.distanceTelemetreDroit <20)
+                LED_ROUGE_1 = 1;
+            else
+                LED_ROUGE_1 = 0;
+                        if(robotState.distanceTelemetreXtrmDroit <15)
+                LED_VERTE_1 = 1;
+            else
+                LED_VERTE_1 = 0;
         }//eux ils ont été mis a jour
     }
 }
