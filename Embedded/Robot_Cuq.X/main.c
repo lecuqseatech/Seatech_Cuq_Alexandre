@@ -66,88 +66,62 @@ int main(void) {
             robotState.distanceTelemetreDroit = 34 / volts - 5;
             volts = ((float) result [4])* 3.3 / 4096;
             robotState.distanceTelemetreXtrmDroit = 34 / volts - 5;
-        }//eux ils ont été mis a jour
+        }//eux ils ont �t� mis a jour
     }
 }
 
 unsigned char stateRobot;
 unsigned char nextStateRobot = 0;
+
 void SetNextRobotStateInAutomaticMode() {
-    unsigned char obstacleMask = 0;
-
+    unsigned char mask = 0;
     // Conversion des capteurs en masque binaire
-    if (robotState.distanceTelemetreXtrmGauche < 15) obstacleMask |= 0b10000;
-    if (robotState.distanceTelemetreGauche < 20) obstacleMask |= 0b01000;
-    if (robotState.distanceTelemetreCentre < 25) obstacleMask |= 0b00100;
-    if (robotState.distanceTelemetreDroit < 20) obstacleMask |= 0b00010;
-    if (robotState.distanceTelemetreXtrmDroit < 15) obstacleMask |= 0b00001;
-
-    // Déterminer la position de l'obstacle
-    unsigned char positionObstacle = DetermineObstaclePosition(obstacleMask);
-
-    // Déterminer l'état du robot
-    nextStateRobot = DetermineNextState(positionObstacle);
-
-    // Transition de l'état
+    if (robotState.distanceTelemetreXtrmGauche < 15) mask |= 0b10000;
+    if (robotState.distanceTelemetreGauche < 20) mask |= 0b01000;
+    if (robotState.distanceTelemetreCentre < 25) mask |= 0b00100;
+    if (robotState.distanceTelemetreDroit < 20) mask |= 0b00010;
+    if (robotState.distanceTelemetreXtrmDroit < 15) mask |= 0b00001;
+    
+    switch (mask) {
+        case 0b00000: nextStateRobot = STATE_AVANCE; 
+        case 0b00001: nextStateRobot = STATE_TOURNE_MID_GAUCHE; 
+        case 0b00010: nextStateRobot = STATE_TOURNE_SUR_PLACE_GAUCHE;   
+        case 0b00011: nextStateRobot = STATE_TOURNE_MID_GAUCHE;   
+        case 0b00100: nextStateRobot = STATE_TOURNE_SUR_PLACE_GAUCHE;       
+        case 0b00101: nextStateRobot = STATE_TOURNE_GAUCHE;  
+        case 0b00110: nextStateRobot = STATE_TOURNE_GAUCHE;      
+        case 0b00111: nextStateRobot = STATE_TOURNE_GAUCHE;  
+        case 0b01000:  nextStateRobot = STATE_TOURNE_SUR_PLACE_DROITE;   
+        case 0b01001:  nextStateRobot = STATE_TOURNE_SUR_PLACE_GAUCHE;       
+        case 0b01010:  nextStateRobot = STATE_TOURNE_SUR_PLACE_GAUCHE;   
+        case 0b01011:  nextStateRobot = STATE_TOURNE_SUR_PLACE_DROITE;           
+        case 0b01100:  nextStateRobot = STATE_TOURNE_DROITE;          
+        case 0b01101:  nextStateRobot = STATE_TOURNE_SUR_PLACE_GAUCHE;      
+        case 0b01110:  nextStateRobot = STATE_TOURNE_SUR_PLACE_GAUCHE;         
+        case 0b01111:  nextStateRobot = STATE_TOURNE_SUR_PLACE_GAUCHE;          
+        case 0b10000:  nextStateRobot = STATE_TOURNE_MID_DROITE;      
+        case 0b10001:  nextStateRobot = STATE_AVANCE;     
+        case 0b10010:  nextStateRobot = STATE_TOURNE_SUR_PLACE_DROITE;        
+        case 0b10011:  nextStateRobot = STATE_TOURNE_SUR_PLACE_GAUCHE;          
+        case 0b10100:  nextStateRobot = STATE_TOURNE_DROITE;     
+        case 0b10101:  nextStateRobot = STATE_TOURNE_SUR_PLACE_GAUCHE;              
+        case 0b10110:  nextStateRobot = STATE_TOURNE_SUR_PLACE_DROITE;              
+        case 0b10111:  nextStateRobot = STATE_TOURNE_SUR_PLACE_GAUCHE;           
+        case 0b11000:  nextStateRobot = STATE_TOURNE_MID_DROITE;        
+        case 0b11001:  nextStateRobot = STATE_TOURNE_SUR_PLACE_GAUCHE;        
+        case 0b11010:  nextStateRobot = STATE_TOURNE_SUR_PLACE_DROITE;       
+        case 0b11011:  nextStateRobot = STATE_RECULE;        
+        case 0b11100:  nextStateRobot = STATE_TOURNE_SUR_PLACE_DROITE;               
+        case 0b11101:  nextStateRobot = STATE_TOURNE_SUR_PLACE_DROITE;               
+        case 0b11110:  nextStateRobot = STATE_TOURNE_SUR_PLACE_DROITE;    
+        case 0b11111:  nextStateRobot = STATE_RECULE;            
+        default:  nextStateRobot = STATE_AVANCE;                       
+    }
+    
+    // Transition de l'�tat
     if (nextStateRobot != stateRobot - 1)
         stateRobot = nextStateRobot;
 }
-
-unsigned char DetermineObstaclePosition(unsigned char mask) {
-    switch (mask) {
-        case 0b00000: return PAS_D_OBSTACLE; 
-        case 0b00001: return OBSTACLE_A_XTRM_DROITE; 
-        case 0b00010: return OBSTACLE_EN_FACE;   
-        case 0b00011: return OBSTACLE_A_XTRM_DROITE;   
-        case 0b00100: return DEVANT;       
-        case 0b00101: return OBSTACLE_A_DROITE;  
-        case 0b00110: return OBSTACLE_A_DROITE;      
-        case 0b00111: return OBSTACLE_A_DROITE;  
-        case 0b01000: return OBSTACLE_EN_FACE2;   
-        case 0b01001: return OBSTACLE_EN_FACE;       
-        case 0b01010: return DEVANT;   
-        case 0b01011: return OBSTACLE_EN_FACE;           
-        case 0b01100: return OBSTACLE_A_GAUCHE;          
-        case 0b01101: return OBSTACLE_EN_FACE;      
-        case 0b01110: return DEVANT;         
-        case 0b01111: return OBSTACLE_EN_FACE;          
-        case 0b10000: return OBSTACLE_A_XTRM_GAUCHE;      
-        case 0b10001: return PAS_D_OBSTACLE;     
-        case 0b10010: return OBSTACLE_EN_FACE2;        
-        case 0b10011: return OBSTACLE_EN_FACE;          
-        case 0b10100: return OBSTACLE_A_GAUCHE;     
-        case 0b10101: return DEVANT;              
-        case 0b10110: return OBSTACLE_EN_FACE2;              
-        case 0b10111: return OBSTACLE_EN_FACE;           
-        case 0b11000: return OBSTACLE_A_XTRM_GAUCHE;        
-        case 0b11001: return OBSTACLE_EN_FACE;        
-        case 0b11010: return OBSTACLE_EN_FACE2;       
-        case 0b11011: return DEVANT;        
-        case 0b11100: return OBSTACLE_EN_FACE2;               
-        case 0b11101: return OBSTACLE_EN_FACE2;               
-        case 0b11110: return OBSTACLE_EN_FACE2;    
-        case 0b11111: return DEVANT;            
-        default: return PAS_D_OBSTACLE;                       
-    }
-}
-
-unsigned char DetermineNextState(unsigned char positionObstacle) {
-    switch (positionObstacle) {
-        case PAS_D_OBSTACLE: return STATE_AVANCE;
-        case DEVANT: return STATE_RECULE;
-        case OBSTACLE_A_DROITE: return STATE_TOURNE_GAUCHE;
-        case OBSTACLE_A_GAUCHE: return STATE_TOURNE_DROITE;
-        case OBSTACLE_EN_FACE: return STATE_TOURNE_SUR_PLACE_GAUCHE;
-        case OBSTACLE_EN_FACE2: return STATE_TOURNE_SUR_PLACE_DROITE;
-        case OBSTACLE_A_XTRM_DROITE: return STATE_TOURNE_MID_GAUCHE;
-        case OBSTACLE_A_XTRM_GAUCHE: return STATE_TOURNE_MID_DROITE;
-        default: return STATE_ATTENTE; // État par défaut si non défini
-    }
-}
-
-
-
-//operatin system loop
 
 void OperatingSystemLoop(void) {
     switch (stateRobot) {
@@ -209,8 +183,9 @@ void OperatingSystemLoop(void) {
             SetNextRobotStateInAutomaticMode();
             break;    
         default:
-            stateRobot = STATE_ATTENTE;
+            stateRobot = STATE_AVANCE;
             break;
             
     }
 }
+

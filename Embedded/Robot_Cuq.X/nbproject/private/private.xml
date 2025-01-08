@@ -4,13 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Github/Seatech_Cuq_Alexandre/Embedded/Robot_Cuq.X/main.c</file>
-            <file>file:/C:/Github/Seatech_Cuq_Alexandre/Embedded/Robot_Cuq.X/main.h</file>
             <file>file:/C:/Github/Seatech_Cuq_Alexandre/Embedded/Robot_Cuq.X/timer.c</file>
-            <file>file:/C:/Github/Seatech_Cuq_Alexandre/Embedded/Robot_Cuq.X/timer.h</file>
-            <file>file:/C:/Github/Seatech_Cuq_Alexandre/Embedded/Robot_Cuq.X/PWM.c</file>
-            <file>file:/C:/Github/Seatech_Cuq_Alexandre/Embedded/Robot_Cuq.X/ADC.c</file>
-            <file>file:/C:/Github/Seatech_Cuq_Alexandre/Embedded/Robot_Cuq.X/robot.h</file>
-            <file>file:/C:/Github/Seatech_Cuq_Alexandre/Embedded/Robot_Cuq.X/robot.c</file>
+            <file>file:/C:/Github/Seatech_Cuq_Alexandre/Embedded/Robot_Cuq.X/main.h</file>
         </group>
     </open-files>
 </project-private>
