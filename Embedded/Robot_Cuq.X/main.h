@@ -29,6 +29,11 @@
 #define OBSTACLE_A_XTRM_DROITE 5
 #define OBSTACLE_EN_FACE2 7
 #define DEVANT 8
+#define STATE_TOURNE_MID_GAUCHE 87
+#define STATE_TOURNE__MID_GAUCHE_EN_COURS 88
+#define STATE_TOURNE_MID_DROITE 98
+#define STATE_TOURNE_MID_DROITE_EN_COURS 99
+
 void OperatingSystemLoop(void);
 void SetNextRobotStateInAutomaticMode();
 
