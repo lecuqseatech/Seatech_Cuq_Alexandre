@@ -5,7 +5,10 @@
         <group>
             <file>file:/C:/Github/Seatech_Cuq_Alexandre/Embedded/Robot_Cuq.X/main.c</file>
             <file>file:/C:/Github/Seatech_Cuq_Alexandre/Embedded/Robot_Cuq.X/timer.c</file>
+            <file>file:/C:/Github/Seatech_Cuq_Alexandre/Embedded/Robot_Cuq.X/IO.c</file>
+            <file>file:/C:/Github/Seatech_Cuq_Alexandre/Embedded/Robot_Cuq.X/IO.h</file>
             <file>file:/C:/Github/Seatech_Cuq_Alexandre/Embedded/Robot_Cuq.X/main.h</file>
+            <file>file:/C:/Github/Seatech_Cuq_Alexandre/Embedded/Robot_Cuq.X/ADC.c</file>
         </group>
     </open-files>
 </project-private>

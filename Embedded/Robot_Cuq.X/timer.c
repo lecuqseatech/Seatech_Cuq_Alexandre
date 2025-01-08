@@ -7,7 +7,7 @@
 #include "ChipConfig.h"
 
 //Initialisation d?un timer 32 bits
-unsigned long timestamp;
+unsigned long timestamp = 100000000;
 
 void InitTimer23(void) {
     T3CONbits.TON = 0; // Stop any 16-bit Timer3 operation
@@ -77,13 +77,13 @@ void InitTimer4(void) {
     IFS1bits.T4IF = 0; // Clear Timer Interrupt Flag
     IEC1bits.T4IE = 1; // Enable Timer interrupt
     T4CONbits.TON = 1; // Enable Timer
-    SetFreqTimer4(10000);
+    SetFreqTimer4(1000);
 }
 
 //interuption timmer 1
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void) {
     IFS0bits.T1IF = 0;
-    LED_BLANCHE_2 = !LED_BLANCHE_2;
+    //LED_BLANCHE_2 = !LED_BLANCHE_2;
     PWMUpdateSpeed();
     ADC1StartConversionSequence();
 }
@@ -139,6 +139,7 @@ void SetFreqTimer4(float freq)
 
 //interuption timmer 4
 void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void) {
+    
     IFS1bits.T4IF = 0;
     timestamp+=1;
     OperatingSystemLoop();
