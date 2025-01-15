@@ -19,6 +19,7 @@ namespace RobotInterface
     public partial class MainWindow : Window
     {
         ExtendedSerialPort serialPort1;
+        string receivedText; 
 
         public MainWindow()
         {
