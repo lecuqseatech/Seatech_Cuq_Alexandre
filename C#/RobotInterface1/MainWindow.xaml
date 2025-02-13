@@ -41,15 +41,15 @@
                 <GroupBox x:Name="telemètre" Header="Telemètre IR" Margin="5" 
                          >
                     <StackPanel>
-                        <Label Content="Ir Guache :  + ???" />
-                        <Label Content="Ir Centre + ???"/>
-                        <Label Content="Ir Droit + ???" />
+                        <TextBox x:Name="IRGauche" Text="Ir Guache :  + ???" />
+                        <TextBox x:Name="IRCentre" Text="Ir Centre + ???"/>
+                        <TextBox x:Name="IRDroit" Text="Ir Droit + ???" />
                     </StackPanel>
                 </GroupBox>
                 <GroupBox x:Name="Moteur" Header="Moteurs IR" Margin="5" >
                     <StackPanel>
-                        <Label Content="Vitesse Gauche :  + ???" />
-                        <Label Content="Vitese Droite : + ???"/>
+                        <TextBox x:Name="VitesseGauche" Text="Vitesse Gauche :  + ???" />
+                        <TextBox x:Name="VitesseDroite" Text="Vitese Droite : + ???"/>
                     </StackPanel>
                 </GroupBox>
             </StackPanel>

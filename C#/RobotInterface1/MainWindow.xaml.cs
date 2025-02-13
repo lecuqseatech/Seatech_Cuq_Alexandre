@@ -77,6 +77,8 @@ namespace RobotInterface1
             byte[] array = Encoding.ASCII.GetBytes(s);
             UartEncodeAndSendMessage(0x0080, array.Length, array);
 
+            UartEncodeAndSendMessage......................................................................................................................
+
         }
     
         private void ButtonClear_Click(object sender, RoutedEventArgs e)
@@ -96,6 +98,7 @@ namespace RobotInterface1
             }
         }
         
+
 
         private void SendMessage()
         {
@@ -198,6 +201,9 @@ namespace RobotInterface1
                     if (calculatedChecksum == receivedChecksum)
                     {
                         textBoxReception.Text += "Réussi \n";
+
+                        ProcessDecodedMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
+
                     }
                     else
                     {
@@ -211,5 +217,47 @@ namespace RobotInterface1
                     break;
             }
         }
+
+        void ProcessDecodedMessage(int msgFunction, int msgPayloadLength, byte[] msgDecodedPayLoad)
+        {
+            if (msgFunction == 0x0020 && msgDecodedPayloadLength == 2)
+            {
+                byte numLed = msgDecodedPayload[0];
+                bool ledState = msgDecodedPayload[1] == 1;
+
+                switch (numLed)
+                {
+                    case 0:
+                        led1.IsChecked = ledState;
+                        break;
+                    case 1:
+                        led2.IsChecked = ledState;
+                        break;
+                    case 2:
+                        led3.IsChecked = ledState;
+                        break;
+                    default:
+                        textBoxReception.Text += $"Led inconnue";
+                        break;
+                }
+            }
+            if (msgFunction == 0x0030 && msgDecodedPayloadLength == 3)
+            {
+                IRGauche.Text = msgDecodedPayload[0].ToString() + "cm";
+                IRCentre.Text = msgDecodedPayload[1].ToString() + "cm";
+                IRDroit.Text = msgDecodedPayload[2].ToString() + "cm";
+
+            }
+            if (msgFunction == 0x0040 && msgDecodedPayloadLength == 2)
+            {
+                VitesseGauche.Text = msgDecodedPayload[0].ToString() + "%";
+                VitesseDroite.Text = msgDecodedPayload[0].ToString() + "%";
+            }
+            if (msgFunction == 0x0080)
+            {
+                textBoxReception.Text += BitConverter.ToString(msgDecodedPayload) + "\n";
+            }
+        }
+
     }
 }
