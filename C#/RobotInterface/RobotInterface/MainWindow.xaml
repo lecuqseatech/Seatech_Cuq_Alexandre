@@ -1,35 +1,49 @@
-﻿<Window x:Class="RobotInterface.MainWindow"
+﻿<Window x:Class="RobotInterface1.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RobotInterface"
+        xmlns:local="clr-namespace:RobotInterface1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="442" Width="809">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="30"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <GroupBox x:Name="Emission" Header="Emission" Background="#FFDDDDDD" Grid.Column="1" Grid.Row="1" Margin="0,0,0,4" Panel.ZIndex="-6" >
-            <TextBox x:Name="TextBoxEmission" TextWrapping="Wrap" Text="" Background="{x:Null}" BorderBrush="{x:Null}" AcceptsReturn ="False" KeyUp="TextBoxEmission_KeyUp" />
+
+        <GroupBox x:Name="Emission" Header="Emission" Background="#FFB7A0A0" BorderBrush="#FFFF0101" MinWidth="5" Grid.Column="0"  KeyUp="textBox_Emission_KeyUp" Grid.Row="0">
+            <TextBox x:Name="textBox_Emission" AcceptsReturn="True" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" KeyUp="textBox_Emission_KeyUp" Text=" ">
+                <TextBox.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF33ADA0"/>
+                        <GradientStop Offset="1" Color="#FFF3F3F3"/>
+                    </LinearGradientBrush>
+                </TextBox.Background>
+            </TextBox>
         </GroupBox>
-        <GroupBox x:Name="Reception" Header="Reception" Background="#FFDDDDDD" Grid.Column="3" Grid.Row="1" Margin="0,0,-3,0">
-            <TextBox x:Name="TextBoxReception" TextWrapping="Wrap" Text="" Background="{x:Null}" BorderBrush="{x:Null}" IsReadOnly="True"/>
+        <GroupBox x:Name="Reception" Header="Reception" Background="#FFB7A0A0" BorderBrush="#FFFF0101" Grid.Column="1" Grid.Row="0">
+            <TextBox x:Name="textBoxReception"  IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap">
+                <TextBox.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF6D00FF"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBox.Background>
+            </TextBox>
         </GroupBox>
-        <Button x:Name="ButtonEnvoyer" Grid.Column="1" Content="Envoyer" Grid.Row="3" HorizontalAlignment="Center" Width="100" Height="30" Click="ButtonEnvoyer_Click_1"
-/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <Button x:Name="buttonEnvoyer" Content="Envoyer" Margin="5" Width="100" Click="ButtonEnvoyer_Click"/>
+            <Button x:Name="buttonTest"  Content="Test" Margin="5" Width="100" Click="ButtonTest_Click"/>
+            <Button x:Name="buttonClear" Content="Clear" Margin="5" Width="100" Click="ButtonClear_Click"/>
+        </StackPanel>
+
+
 
     </Grid>
 </Window>
-
