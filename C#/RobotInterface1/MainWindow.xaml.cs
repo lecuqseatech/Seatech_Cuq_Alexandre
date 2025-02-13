@@ -17,12 +17,9 @@ using System.Security.RightsManagement;
 namespace RobotInterface1
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         ExtendedSerialPort serialPort1;
-        //String receivedText = "";
         DispatcherTimer timerAffichage;
         Robot robot = new Robot();
         byte[] byteList = new byte[20];
@@ -40,20 +37,15 @@ namespace RobotInterface1
             timerAffichage.Start();
 
 
+
         }
 
         private void TimerAffichage_Tick(object? sender, EventArgs e)
         {
-            //if (robot.receivedText.Length != 0)
-            //{
-            //    textBoxReception.Text += robot.receivedText;
-            //    robot.receivedText = "";
-            //}
             while (robot.byteListReceived.Count > 0)
             {
                 var c = robot.byteListReceived.Dequeue();
                 DecodeMessage(c);
-                //textBoxReception.Text +=c.ToString("X2") + " ";//"0x"+c.ToString("X4") + " ";
             }
 
 
@@ -61,7 +53,6 @@ namespace RobotInterface1
 
         public void SerialPort1_DataReceived(object sender, DataReceivedArgs e)
         {
-            //robot.receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
             foreach (byte c in e.Data)
             {                
                 robot.byteListReceived.Enqueue(c);
@@ -82,12 +73,6 @@ namespace RobotInterface1
 
         private void ButtonTest_Click(object sender, RoutedEventArgs e)
         {
-            //byte[] byteList = new byte[20];
-            //for (int i = 0; i < byteList.Length; i++)
-            //{
-            //    byteList[i] = (byte)(2 * i);
-            //}
-            //serialPort1.Write(byteList, 0, byteList.Length);
             string s = "Bonjour";
             byte[] array = Encoding.ASCII.GetBytes(s);
             UartEncodeAndSendMessage(0x0080, array.Length, array);
@@ -115,9 +100,8 @@ namespace RobotInterface1
         private void SendMessage()
         {
             serialPort1.WriteLine(textBox_Emission.Text);
-            //textBoxReception.Text += "Reçu : " + textBox_Emission.Text + "\n";
+            textBoxReception.Text += "Message reçu : " + textBox_Emission.Text + "\n";
             textBox_Emission.Text = "";
-
         }
         byte CalculateChecksum(int msgFunction,
         int msgPayloadLength,byte [] msgPayload)
@@ -192,7 +176,7 @@ namespace RobotInterface1
                     msgDecodedPayloadLength |= c;
                     if (msgDecodedPayloadLength == 0)
                         rcvState = StateReception.CheckSum;
-                    else if (msgDecodedPayloadLength > 1024)
+                    else if (msgDecodedPayloadLength > 256)
                         rcvState = StateReception.Waiting;
                     else
                     {
@@ -209,15 +193,15 @@ namespace RobotInterface1
 
                 case StateReception.CheckSum:
                     byte calculatedChecksum = CalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
-                    byte receivedChecksum = c;
+                    byte receivedChecksum = c ;
 
                     if (calculatedChecksum == receivedChecksum)
                     {
-                        textBoxReception.Text += "\n Youpi";
+                        textBoxReception.Text += "Réussi \n";
                     }
                     else
                     {
-                        textBoxReception.Text += "Checksum error";
+                        textBoxReception.Text += "Erreur";
                     }
                     rcvState = StateReception.Waiting;
                     break;
@@ -227,10 +211,5 @@ namespace RobotInterface1
                     break;
             }
         }
-
-
-
-
-
     }
 }

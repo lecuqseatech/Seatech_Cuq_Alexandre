@@ -33,8 +33,14 @@
       <itemPath>ToolBox.c</itemPath>
       <itemPath>PWM.c</itemPath>
       <itemPath>ADC.c</itemPath>
+      <itemPath>CB_RX1.c</itemPath>
+      <itemPath>CB_TX1.c</itemPath>
+      <itemPath>UART.c</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="default" type="2">

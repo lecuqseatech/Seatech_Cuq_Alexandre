@@ -1,10 +1,3 @@
-/* 
- * File:   CB_TX1.h
- * Author: E306-PC4
- *
- * Created on 22 janvier 2025, 15:20
- */
-
 #ifndef CB_TX1_H
 #define	CB_TX1_H
 void SendMessage(unsigned char* message, int length);

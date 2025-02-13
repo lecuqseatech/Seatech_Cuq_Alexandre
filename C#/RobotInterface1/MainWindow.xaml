@@ -15,27 +15,14 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="130"/>
         </Grid.RowDefinitions>
 
-        <GroupBox x:Name="Emission" Header="Emission" Background="#FFB7A0A0" BorderBrush="#FFFF0101" MinWidth="5" Grid.Column="0"  KeyUp="textBox_Emission_KeyUp" Grid.Row="0">
-            <TextBox x:Name="textBox_Emission" AcceptsReturn="True" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" KeyUp="textBox_Emission_KeyUp" Text=" ">
-                <TextBox.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF33ADA0"/>
-                        <GradientStop Offset="1" Color="#FFF3F3F3"/>
-                    </LinearGradientBrush>
-                </TextBox.Background>
-            </TextBox>
+        <GroupBox x:Name="Emission" Header="Emission" Background="Red" BorderBrush="#FFFF0101" MinWidth="5" Grid.Column="0"  KeyUp="textBox_Emission_KeyUp" Grid.Row="0">
+            <TextBox x:Name="textBox_Emission" AcceptsReturn="True" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" KeyUp="textBox_Emission_KeyUp" Text=" "/>
         </GroupBox>
-        <GroupBox x:Name="Reception" Header="Reception" Background="#FFB7A0A0" BorderBrush="#FFFF0101" Grid.Column="1" Grid.Row="0">
-            <TextBox x:Name="textBoxReception"  IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap">
-                <TextBox.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF6D00FF"/>
-                        <GradientStop Color="White" Offset="1"/>
-                    </LinearGradientBrush>
-                </TextBox.Background>
-            </TextBox>
+        <GroupBox x:Name="Reception" Header="Reception" Background="Red" BorderBrush="#FFFF0101" Grid.Column="1" Grid.Row="0">
+            <TextBox x:Name="textBoxReception"  IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" Background="White"/>
         </GroupBox>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center">
             <Button x:Name="buttonEnvoyer" Content="Envoyer" Margin="5" Width="100" Click="ButtonEnvoyer_Click"/>
@@ -43,6 +30,30 @@
             <Button x:Name="buttonClear" Content="Clear" Margin="5" Width="100" Click="ButtonClear_Click"/>
         </StackPanel>
 
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Top">
+                <GroupBox x:Name="led" Header="Led" Margin="5">
+                    <StackPanel>
+                        <CheckBox x:Name="led1" Content="Led1" Margin="5" />
+                        <CheckBox x:Name="led2" Content="Led2" Margin="5" />
+                        <CheckBox x:Name="led3" Content="Led3" Margin="5" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox x:Name="telemètre" Header="Telemètre IR" Margin="5" 
+                         >
+                    <StackPanel>
+                        <Label Content="Ir Guache :  + ???" />
+                        <Label Content="Ir Centre + ???"/>
+                        <Label Content="Ir Droit + ???" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox x:Name="Moteur" Header="Moteurs IR" Margin="5" >
+                    <StackPanel>
+                        <Label Content="Vitesse Gauche :  + ???" />
+                        <Label Content="Vitese Droite : + ???"/>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        
 
 
     </Grid>
